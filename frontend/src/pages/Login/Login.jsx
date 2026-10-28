@@ -17,7 +17,12 @@ const Login = () => {
     setLoading(true);
 
     try {
-      const response = await API.post('/auth/login', { email, password });
+      const cleanEmail = email.trim();
+      const cleanPassword = password.trim();
+      const response = await API.post('/auth/login', { 
+        email: cleanEmail, 
+        password: cleanPassword 
+      });
       localStorage.setItem('token', response.data.token);
       localStorage.setItem('user', JSON.stringify(response.data.user));
       navigate('/');
