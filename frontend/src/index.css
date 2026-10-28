@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    margin: 0;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background-color: #0d0f12;
+    color: #f1f5f9;
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+/* Modificación de redondeos para dar un aspecto más cuadrado y definido */
+.rounded-2xl {
+  border-radius: 0.75rem !important; /* Baja de 16px a 10px */
+}
+
+.rounded-xl {
+  border-radius: 0.5rem !important;   /* Baja de 12px a 8px */
+}
