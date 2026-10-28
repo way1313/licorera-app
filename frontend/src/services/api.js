@@ -1,8 +1,10 @@
 // frontend/src/services/api.js
 import axios from 'axios';
 
+const baseURL = import.meta.env.VITE_API_URL || 'https://licorera-app.onrender.com/api';
+
 const API = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:4000/api',
+  baseURL: baseURL.replace(/\/+$/, ''), // Elimina barras diagonales al final si las hubiera
 });
 
 // Interceptor para inyectar automáticamente el token JWT en cada petición
