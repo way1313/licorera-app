@@ -100,17 +100,17 @@ const Movements = () => {
   };
 
   return (
-    <div className="p-8 max-w-7xl mx-auto space-y-7">
+    <div className="p-4 sm:p-6 lg:p-8 max-w-7xl mx-auto space-y-6 sm:space-y-7">
       <div>
-        <h1 className="text-2xl font-bold text-white tracking-tight">Entradas y Salidas de Mercancía</h1>
+        <h1 className="text-xl sm:text-2xl font-bold text-white tracking-tight">Entradas y Salidas de Mercancía</h1>
         <p className="text-cava-muted text-xs mt-0.5">Registra compras a distribuidores, ventas al mostrador y ajustes de cava.</p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Formulario de registro */}
-        <div className="bg-cava-surface rounded-xl p-6 border border-cava-border shadow-lg h-fit">
+        <div className="bg-cava-surface rounded-xl p-5 sm:p-6 border border-cava-border shadow-lg h-fit">
           <h2 className="text-sm font-bold text-white mb-4 flex items-center gap-2">
-            <PlusCircle size={18} className="text-amber-400" />
+            <PlusCircle size={17} className="text-amber-400" />
             Nuevo Movimiento
           </h2>
 
@@ -127,7 +127,7 @@ const Movements = () => {
             </div>
           )}
 
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <form onSubmit={handleSubmit} className="space-y-3.5">
             <div>
               <label className="block text-[11px] font-semibold text-cava-muted uppercase mb-1.5">
                 Tipo de Operación
@@ -136,24 +136,24 @@ const Movements = () => {
                 <button
                   type="button"
                   onClick={() => setFormData({ ...formData, type: 'exit' })}
-                  className={`py-2 px-3 rounded-lg border text-xs font-bold flex items-center justify-center gap-1.5 transition ${
+                  className={`py-2 px-2.5 rounded-lg border text-xs font-bold flex items-center justify-center gap-1 transition ${
                     formData.type === 'exit'
                       ? 'bg-amber-500/15 border-amber-500 text-amber-400 shadow-sm'
                       : 'border-cava-border text-cava-muted hover:bg-cava-card'
                   }`}
                 >
-                  <ArrowUpRight size={15} /> Salida (Venta)
+                  <ArrowUpRight size={14} /> Salida
                 </button>
                 <button
                   type="button"
                   onClick={() => setFormData({ ...formData, type: 'entry' })}
-                  className={`py-2 px-3 rounded-lg border text-xs font-bold flex items-center justify-center gap-1.5 transition ${
+                  className={`py-2 px-2.5 rounded-lg border text-xs font-bold flex items-center justify-center gap-1 transition ${
                     formData.type === 'entry'
                       ? 'bg-slate-700/60 border-slate-500 text-slate-100 shadow-sm'
                       : 'border-cava-border text-cava-muted hover:bg-cava-card'
                   }`}
                 >
-                  <ArrowDownLeft size={15} /> Entrada (Compra)
+                  <ArrowDownLeft size={14} /> Entrada
                 </button>
               </div>
             </div>
@@ -218,25 +218,25 @@ const Movements = () => {
         </div>
 
         {/* Tabla de Movimientos */}
-        <div className="lg:col-span-2 bg-cava-surface rounded-xl border border-cava-border shadow-lg p-6">
-          <div className="flex items-center justify-between mb-4">
+        <div className="lg:col-span-2 bg-cava-surface rounded-xl border border-cava-border shadow-lg p-5 sm:p-6">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
             <h2 className="text-sm font-bold text-white tracking-wide">Últimos Movimientos Registrados</h2>
             <button
               onClick={handleExportMovements}
-              className="flex items-center gap-1.5 text-xs font-semibold text-cava-text hover:text-amber-400 bg-cava-card px-3 py-1.5 rounded-lg border border-cava-border transition"
+              className="self-start sm:self-auto flex items-center gap-1.5 text-xs font-semibold text-cava-text hover:text-amber-400 bg-cava-card px-3 py-1.5 rounded-lg border border-cava-border transition"
             >
               <Download size={13} className="text-amber-400" />
-              Exportar CSV / Excel
+              Exportar
             </button>
           </div>
           <div className="overflow-x-auto">
-            <table className="w-full text-left border-collapse text-xs">
+            <table className="w-full min-w-[500px] text-left border-collapse text-xs">
               <thead>
                 <tr className="border-b border-cava-border text-cava-muted uppercase font-semibold bg-cava-card/40">
                   <th className="py-2.5 px-3">Tipo</th>
                   <th className="py-2.5 px-3">Producto</th>
-                  <th className="py-2.5 px-3 text-center">Cantidad</th>
-                  <th className="py-2.5 px-3 text-right">Monto Total</th>
+                  <th className="py-2.5 px-3 text-center">Cant.</th>
+                  <th className="py-2.5 px-3 text-right">Monto</th>
                   <th className="py-2.5 px-3">Motivo</th>
                 </tr>
               </thead>
@@ -252,28 +252,28 @@ const Movements = () => {
                     const isEntry = m.type === 'entry';
                     return (
                       <tr key={m.id} className="hover:bg-cava-card/60 transition">
-                        <td className="py-3 px-3">
+                        <td className="py-3 px-3 whitespace-nowrap">
                           <span
-                            className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md text-[11px] font-bold ${
+                            className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[10px] sm:text-[11px] font-bold ${
                               isEntry
                                 ? 'bg-slate-800 text-slate-300 border border-slate-700'
                                 : 'bg-amber-500/10 text-amber-300 border border-amber-500/30'
                             }`}
                           >
-                            {isEntry ? <ArrowDownLeft size={11} /> : <ArrowUpRight size={11} />}
+                            {isEntry ? <ArrowDownLeft size={10} /> : <ArrowUpRight size={10} />}
                             {isEntry ? 'Entrada' : 'Salida'}
                           </span>
                         </td>
-                        <td className="py-3 px-3 font-medium text-white">
+                        <td className="py-3 px-3 font-medium text-white truncate max-w-[130px] sm:max-w-none">
                           {m.product?.name || 'Producto #' + m.productId}
                         </td>
                         <td className="py-3 px-3 text-center font-bold text-slate-300">
-                          {m.quantity} un.
+                          {m.quantity}
                         </td>
-                        <td className="py-3 px-3 text-right font-bold text-amber-400">
+                        <td className="py-3 px-3 text-right font-bold text-amber-400 whitespace-nowrap">
                           ${Number(m.totalAmount).toLocaleString()}
                         </td>
-                        <td className="py-3 px-3 text-cava-muted">
+                        <td className="py-3 px-3 text-cava-muted truncate max-w-[120px] sm:max-w-none">
                           {m.reason || 'Sin observación'}
                         </td>
                       </tr>

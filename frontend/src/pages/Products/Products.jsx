@@ -22,15 +22,7 @@ const Products = () => {
   const [formData, setFormData] = useState(initialFormState);
 
   const categories = [
-    'Whisky',
-    'Ron',
-    'Aguardiente',
-    'Tequila',
-    'Vinos',
-    'Cervezas',
-    'Ginebra',
-    'Vodka',
-    'Otros',
+    'Whisky', 'Ron', 'Aguardiente', 'Tequila', 'Vinos', 'Cervezas', 'Ginebra', 'Vodka', 'Otros'
   ];
 
   const fetchProducts = async () => {
@@ -140,34 +132,34 @@ const Products = () => {
   );
 
   return (
-    <div className="p-8 max-w-7xl mx-auto space-y-6">
+    <div className="p-4 sm:p-6 lg:p-8 max-w-7xl mx-auto space-y-6">
       {/* Cabecera */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-white tracking-tight">Inventario de Productos</h1>
+          <h1 className="text-xl sm:text-2xl font-bold text-white tracking-tight">Inventario de Productos</h1>
           <p className="text-cava-muted text-xs mt-0.5">Gestiona el catálogo de licores, costos y precios de venta.</p>
         </div>
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2.5 sm:gap-3 flex-wrap">
           <button
             onClick={handleExportProducts}
-            className="flex items-center gap-2 bg-cava-surface hover:bg-cava-card text-cava-text font-medium px-4 py-2 rounded-lg border border-cava-border shadow-sm transition text-xs"
+            className="flex-1 sm:flex-none flex items-center justify-center gap-2 bg-cava-surface hover:bg-cava-card text-cava-text font-medium px-3.5 py-2 rounded-lg border border-cava-border shadow-sm transition text-xs"
           >
-            <Download size={15} className="text-amber-400" />
-            Exportar Inventario
+            <Download size={14} className="text-amber-400" />
+            Exportar
           </button>
           <button
             onClick={handleOpenCreateModal}
-            className="flex items-center gap-2 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold px-4 py-2 rounded-lg shadow-md transition text-xs"
+            className="flex-1 sm:flex-none flex items-center justify-center gap-2 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold px-3.5 py-2 rounded-lg shadow-md transition text-xs"
           >
-            <Plus size={16} />
+            <Plus size={15} />
             Nuevo Producto
           </button>
         </div>
       </div>
 
       {/* Buscador */}
-      <div className="bg-cava-surface p-3.5 rounded-xl border border-cava-border shadow-md flex items-center gap-3">
-        <Search size={17} className="text-cava-muted shrink-0" />
+      <div className="bg-cava-surface p-3 sm:p-3.5 rounded-xl border border-cava-border shadow-md flex items-center gap-3">
+        <Search size={16} className="text-cava-muted shrink-0" />
         <input
           type="text"
           placeholder="Buscar licor por nombre o categoría..."
@@ -177,10 +169,10 @@ const Products = () => {
         />
       </div>
 
-      {/* Tabla de Productos */}
+      {/* Tabla con scroll horizontal asegurado */}
       <div className="bg-cava-surface rounded-xl border border-cava-border shadow-md overflow-hidden">
         <div className="overflow-x-auto">
-          <table className="w-full text-left border-collapse text-xs">
+          <table className="w-full min-w-[600px] text-left border-collapse text-xs">
             <thead>
               <tr className="border-b border-cava-border text-cava-muted uppercase font-semibold bg-cava-card/50">
                 <th className="py-3 px-4">Producto</th>
@@ -203,50 +195,50 @@ const Products = () => {
                   const isLow = Number(item.stock) <= Number(item.minStock);
                   return (
                     <tr key={item.id} className="hover:bg-cava-card/60 transition">
-                      <td className="py-3.5 px-4 flex items-center gap-3 font-medium text-white">
-                        <div className="w-8 h-8 rounded-lg bg-cava-card text-amber-400 border border-cava-border flex items-center justify-center shrink-0">
-                          <Wine size={16} />
+                      <td className="py-3 px-4 flex items-center gap-2.5 font-medium text-white">
+                        <div className="w-7 h-7 rounded-lg bg-cava-card text-amber-400 border border-cava-border flex items-center justify-center shrink-0">
+                          <Wine size={15} />
                         </div>
-                        {item.name}
+                        <span className="truncate max-w-[160px] sm:max-w-none">{item.name}</span>
                       </td>
-                      <td className="py-3.5 px-4 text-cava-muted">
-                        <span className="bg-cava-card border border-cava-border px-2.5 py-1 rounded-md text-[11px] font-medium text-slate-300">
+                      <td className="py-3 px-4 text-cava-muted">
+                        <span className="bg-cava-card border border-cava-border px-2 py-0.5 rounded-md text-[10px] sm:text-[11px] font-medium text-slate-300">
                           {item.category}
                         </span>
                       </td>
-                      <td className="py-3.5 px-4 text-right font-bold text-amber-400">
+                      <td className="py-3 px-4 text-right font-bold text-amber-400 whitespace-nowrap">
                         ${Number(item.price).toLocaleString()}
                       </td>
-                      <td className="py-3.5 px-4 text-right text-cava-muted">
+                      <td className="py-3 px-4 text-right text-cava-muted whitespace-nowrap">
                         ${Number(item.costPrice).toLocaleString()}
                       </td>
-                      <td className="py-3.5 px-4 text-center">
+                      <td className="py-3 px-4 text-center">
                         <span
-                          className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-md text-[11px] font-bold ${
+                          className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[10px] sm:text-[11px] font-bold ${
                             isLow
                               ? 'bg-amber-500/10 text-amber-400 border border-amber-500/30'
                               : 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/30'
                           }`}
                         >
-                          {isLow && <AlertTriangle size={11} />}
+                          {isLow && <AlertTriangle size={10} />}
                           {item.stock} un.
                         </span>
                       </td>
-                      <td className="py-3.5 px-4 text-center">
-                        <div className="flex items-center justify-center gap-1.5">
+                      <td className="py-3 px-4 text-center">
+                        <div className="flex items-center justify-center gap-1">
                           <button
                             onClick={() => handleOpenEditModal(item)}
                             className="p-1.5 text-cava-muted hover:text-amber-400 hover:bg-cava-card rounded-md transition"
                             title="Editar producto"
                           >
-                            <Edit3 size={15} />
+                            <Edit3 size={14} />
                           </button>
                           <button
                             onClick={() => handleDelete(item.id)}
                             className="p-1.5 text-cava-muted hover:text-rose-400 hover:bg-rose-500/10 rounded-md transition"
                             title="Eliminar producto"
                           >
-                            <Trash2 size={15} />
+                            <Trash2 size={14} />
                           </button>
                         </div>
                       </td>
@@ -259,12 +251,12 @@ const Products = () => {
         </div>
       </div>
 
-      {/* Modal Reutilizable Crear / Editar */}
+      {/* Modal Adaptable */}
       {isModalOpen && (
-        <div className="fixed inset-0 bg-black/70 backdrop-blur-xs flex items-center justify-center p-4 z-50">
-          <div className="bg-[#15181e] rounded-xl p-6 w-full max-w-lg shadow-2xl border border-[#2b323f]">
+        <div className="fixed inset-0 bg-black/70 backdrop-blur-xs flex items-center justify-center p-3 sm:p-4 z-50 overflow-y-auto">
+          <div className="bg-[#15181e] rounded-xl p-5 sm:p-6 w-full max-w-lg shadow-2xl border border-[#2b323f] my-auto">
             <div className="flex items-center justify-between mb-4 pb-2 border-b border-[#2b323f]">
-              <h3 className="font-bold text-white text-base">
+              <h3 className="font-bold text-white text-sm sm:text-base">
                 {editingId ? 'Editar Producto' : 'Registrar Nuevo Producto'}
               </h3>
               <button
@@ -275,7 +267,7 @@ const Products = () => {
               </button>
             </div>
 
-            <form onSubmit={handleSubmit} className="space-y-4">
+            <form onSubmit={handleSubmit} className="space-y-3.5">
               <div>
                 <label className="block text-[11px] font-semibold text-cava-muted uppercase mb-1">Nombre</label>
                 <input
@@ -289,7 +281,7 @@ const Products = () => {
                 />
               </div>
 
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
                   <label className="block text-[11px] font-semibold text-cava-muted uppercase mb-1">Categoría</label>
                   <select
@@ -318,7 +310,7 @@ const Products = () => {
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
                   <label className="block text-[11px] font-semibold text-cava-muted uppercase mb-1">Costo Compra ($)</label>
                   <input
@@ -348,7 +340,7 @@ const Products = () => {
               </div>
 
               <div>
-                <label className="block text-[11px] font-semibold text-cava-muted uppercase mb-1">Stock Mínimo (Alerta)</label>
+                <label className="block text-[11px] font-semibold text-cava-muted uppercase mb-1">Stock Mínimo</label>
                 <input
                   type="number"
                   name="minStock"

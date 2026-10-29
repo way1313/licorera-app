@@ -1,9 +1,9 @@
 // frontend/src/components/Navbar/Navbar.jsx
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { LogOut, ChevronDown, Bell, Crown } from 'lucide-react';
+import { LogOut, ChevronDown, Bell, Crown, Menu } from 'lucide-react';
 
-const Navbar = () => {
+const Navbar = ({ onToggleMobileMenu }) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const navigate = useNavigate();
 
@@ -17,16 +17,30 @@ const Navbar = () => {
   };
 
   return (
-    <header className="h-16 bg-cava-surface border-b border-cava-border px-8 flex items-center justify-between sticky top-0 z-40 shadow-md">
-      <div className="flex items-center gap-2 text-xs text-cava-muted">
-        <span className="flex h-2 w-2 relative">
-          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
-          <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-500"></span>
-        </span>
-        <span className="font-medium tracking-wide uppercase text-[11px] text-slate-300">Terminal Principal</span>
+    <header className="h-16 bg-cava-surface border-b border-cava-border px-4 sm:px-6 lg:px-8 flex items-center justify-between sticky top-0 z-30 shadow-md">
+      {/* Botón hamburguesa para móvil + Estado */}
+      <div className="flex items-center gap-3">
+        <button
+          onClick={onToggleMobileMenu}
+          className="p-2 -ml-1 text-cava-muted hover:text-white lg:hidden rounded-lg hover:bg-cava-card"
+          title="Abrir menú"
+        >
+          <Menu size={20} />
+        </button>
+
+        <div className="flex items-center gap-2 text-xs text-cava-muted">
+          <span className="flex h-2 w-2 relative">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-500"></span>
+          </span>
+          <span className="font-medium tracking-wide uppercase text-[10px] sm:text-[11px] text-slate-300 truncate max-w-[120px] sm:max-w-none">
+            Terminal Principal
+          </span>
+        </div>
       </div>
 
-      <div className="flex items-center gap-4">
+      {/* Perfil & Acciones */}
+      <div className="flex items-center gap-2 sm:gap-4">
         <button
           type="button"
           className="p-2 text-cava-muted hover:text-amber-400 hover:bg-cava-card rounded-lg transition relative"
@@ -37,11 +51,10 @@ const Navbar = () => {
 
         <div className="h-4 w-px bg-cava-border"></div>
 
-        {/* Dropdown de Administrador */}
         <div className="relative">
           <button
             onClick={() => setDropdownOpen(!dropdownOpen)}
-            className="flex items-center gap-3 p-1.5 rounded-lg hover:bg-cava-card transition border border-transparent hover:border-cava-border"
+            className="flex items-center gap-2 sm:gap-3 p-1.5 rounded-lg hover:bg-cava-card transition border border-transparent hover:border-cava-border"
           >
             <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-amber-500 to-amber-400 text-slate-950 flex items-center justify-center font-bold text-xs shadow-sm">
               {user.name ? user.name.charAt(0).toUpperCase() : 'A'}
@@ -59,8 +72,7 @@ const Navbar = () => {
           {dropdownOpen && (
             <>
               <div className="fixed inset-0 z-30" onClick={() => setDropdownOpen(false)}></div>
-              {/* Contenedor sólido opaco para evitar transparencias */}
-              <div className="absolute right-0 mt-2 w-56 bg-[#1a1e27] border border-cava-border rounded-xl shadow-2xl py-2 z-40">
+              <div className="absolute right-0 mt-2 w-52 sm:w-56 bg-[#1a1e27] border border-cava-border rounded-xl shadow-2xl py-2 z-40">
                 <div className="px-4 py-2.5 border-b border-cava-border">
                   <p className="text-xs font-semibold text-slate-200">{user.name}</p>
                   <p className="text-[11px] text-cava-muted truncate">{user.email}</p>
